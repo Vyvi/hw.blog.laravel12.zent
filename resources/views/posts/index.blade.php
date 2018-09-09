@@ -49,10 +49,12 @@
 	    @endif
                
     	<!-- NAVIGATION -->
-    	<div class="navigation">
-        	<a href="#" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
-            <a href="#" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
-            <div class="clearfix"></div>
+        <div class="navigation">
+                    <a href="{{$posts->previousPageUrl()
+        }}" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
+                    <a href="{{$posts->nextPageUrl()
+        }}" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
+                    <div class="clearfix"></div>
         </div>
     
     </div>
