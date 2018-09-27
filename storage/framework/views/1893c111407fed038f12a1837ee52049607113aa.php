@@ -10,26 +10,34 @@
         <?php if(isset($posts)): ?> 
             
             <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                	<div class="col-xs-6">
+                	<div class="col-xs-12">
               
                   
                     	<!-- ARTICLE 1 -->      
                     	<article>
                         	<div class="post-image">
-                            	<img src="<?php echo e(asset('')); ?>blog_assets/img/img-post-1.jpg" alt="post image 1">
-                                <div class="category"><a href="#">IMG</a></div>
-                            </div>
-                            <div class="post-text">
-                            	<span class="date">07 Jun 2016</span>
-                                <h2><a href="#">MAECENAS CONSECTETUR</a></h2>
-                                <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.
-            									Nunc maximus arcu sit amet accumsan imperdiet. Aliquam elementum efficitur ipsum nec blandit. 
-                                                Pellentesque posuere vitae metus sed auctor. Nullam accumsan fringilla ligula non pellentesque.
-                                                <a href="#"><i class="icon-arrow-right2"></i></a></p>                                 
-                            </div>
-                            <div class="post-info">
-                            	<div class="post-by">Post By <a href="#">AD-Theme</a></div>
-                            </div>
+                        <img src="<?php echo e(asset($post->thumbnail)); ?>" alt="post image 1">
+                        <div class="category"><a href="<?php echo e(asset('')); ?>category/<?php echo e($post->category_slug); ?>"><?php echo e($post->category->name); ?></a></div>
+                    </div>
+                    <div class="post-text">
+                        <span class="date"><?php echo e($post->created_at); ?></span>
+                        <h2><a href="<?php echo e(asset('')); ?>blog/<?php echo e($post->slug); ?>"><?php echo e($post->title); ?></a></h2>
+                        <p class="text">
+                            <?php echo $post->description; ?>
+
+                            <a href="#"><i class="icon-arrow-right2"></i></a>
+                        </p>                                 
+                    </div>
+                    <div class="post-info">
+                        <div class="post-by">Post By <a href="#">AD-Theme</a></div>
+                        <div class="extra-info">
+                            <a href="#"><i class="icon-facebook5"></i></a>
+                            <a href="#"><i class="icon-twitter4"></i></a>
+                            <a href="#"><i class="icon-google-plus"></i></a>
+                            <span class="comments">25 <i class="icon-bubble2"></i></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                         </article>
                     
                    </div>
@@ -44,7 +52,7 @@
                     <a href="<?php echo e($posts->previousPageUrl()); ?>" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
                     <a href="<?php echo e($posts->nextPageUrl()); ?>" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
                     <div class="clearfix"></div>
-        </div> 
+        </div>
       
       
       
@@ -138,19 +146,12 @@
                 	Tags
                 </h3>
             	<div class="tags-container">
-                    <a href="#">Audio</a>
-                    <a href="#">Travel</a>
-                    <a href="#">Food</a>
-                    <a href="#">Event</a>
-                    <a href="#">Wordpress</a>
-                    <a href="#">Video</a>
-                    <a href="#">Design</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Post</a> 
-                    <a href="#">Img</a>
-                    <a href="#">Masonry</a>                                    
-                </div>
+                <?php if(isset($tags)): ?> 
+                <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <a href="<?php echo e(asset('')); ?>tag/<?php echo e($tag->slug); ?>"><?php echo e($tag->name); ?></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>                                    
+            </div>
             	<div class="clearfix"></div>
             </div> 
 

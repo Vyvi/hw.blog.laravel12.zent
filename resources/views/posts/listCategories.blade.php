@@ -10,26 +10,33 @@
         @if(isset($posts)) 
             {{-- in tất cả bài viết ra bằng foreach --}}
             @foreach ($posts as $post)
-                	<div class="col-xs-6">
+                	<div class="col-xs-12">
               
                   
                     	<!-- ARTICLE 1 -->      
                     	<article>
                         	<div class="post-image">
-                            	<img src="{{asset('')}}blog_assets/img/img-post-1.jpg" alt="post image 1">
-                                <div class="category"><a href="#">IMG</a></div>
-                            </div>
-                            <div class="post-text">
-                            	<span class="date">07 Jun 2016</span>
-                                <h2><a href="#">MAECENAS CONSECTETUR</a></h2>
-                                <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.
-            									Nunc maximus arcu sit amet accumsan imperdiet. Aliquam elementum efficitur ipsum nec blandit. 
-                                                Pellentesque posuere vitae metus sed auctor. Nullam accumsan fringilla ligula non pellentesque.
-                                                <a href="#"><i class="icon-arrow-right2"></i></a></p>                                 
-                            </div>
-                            <div class="post-info">
-                            	<div class="post-by">Post By <a href="#">AD-Theme</a></div>
-                            </div>
+                        <img src="{{ asset($post->thumbnail) }}" alt="post image 1">
+                        <div class="category"><a href="{{asset('')}}category/{{$post->category_slug}}">{{$post->category->name}}</a></div>
+                    </div>
+                    <div class="post-text">
+                        <span class="date">{{ $post->created_at }}</span>
+                        <h2><a href="{{asset('')}}blog/{{$post->slug}}">{{ $post->title }}</a></h2>
+                        <p class="text">
+                            {!! $post->description !!}
+                            <a href="#"><i class="icon-arrow-right2"></i></a>
+                        </p>                                 
+                    </div>
+                    <div class="post-info">
+                        <div class="post-by">Post By <a href="#">AD-Theme</a></div>
+                        <div class="extra-info">
+                            <a href="#"><i class="icon-facebook5"></i></a>
+                            <a href="#"><i class="icon-twitter4"></i></a>
+                            <a href="#"><i class="icon-google-plus"></i></a>
+                            <span class="comments">25 <i class="icon-bubble2"></i></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                         </article>
                     
                    </div>
@@ -46,7 +53,7 @@
                     <a href="{{$posts->nextPageUrl()
         }}" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
                     <div class="clearfix"></div>
-        </div> 
+        </div>
       
       
       
@@ -140,19 +147,12 @@
                 	Tags
                 </h3>
             	<div class="tags-container">
-                    <a href="#">Audio</a>
-                    <a href="#">Travel</a>
-                    <a href="#">Food</a>
-                    <a href="#">Event</a>
-                    <a href="#">Wordpress</a>
-                    <a href="#">Video</a>
-                    <a href="#">Design</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Post</a> 
-                    <a href="#">Img</a>
-                    <a href="#">Masonry</a>                                    
-                </div>
+                @if(isset($tags)) 
+                @foreach ($tags as $tag)
+                    <a href="{{asset('')}}tag/{{$tag->slug}}">{{$tag->name}}</a>
+                @endforeach
+                @endif                                    
+            </div>
             	<div class="clearfix"></div>
             </div> 
 

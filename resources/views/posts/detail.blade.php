@@ -2,7 +2,14 @@
 
 {{-- thay đổi nội dung phần content --}}
 @section('content')
-
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     	<!-- CONTENT -->
     	<div class="content col-xs-8">
         
@@ -10,7 +17,7 @@
         	<!-- ARTICLE 1 -->
         	<article>
             	<div class="post-image">
-                	<img src="{{asset('')}}blog_assets/img/img-post-1.jpg" alt="post image 1"> 
+                	<img src="{{ asset($post->thumbnail) }}" alt="post image 1"> 
                 </div>
                 <div class="post-text">
                     <h2>{{$post->title}}</h2>
@@ -132,19 +139,12 @@
                 	Tags
                 </h3>
             	<div class="tags-container">
-                    <a href="#">Audio</a>
-                    <a href="#">Travel</a>
-                    <a href="#">Food</a>
-                    <a href="#">Event</a>
-                    <a href="#">Wordpress</a>
-                    <a href="#">Video</a>
-                    <a href="#">Design</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Post</a> 
-                    <a href="#">Img</a>
-                    <a href="#">Masonry</a>                                    
-                </div>
+                @if(isset($tags)) 
+                @foreach ($tags as $tag)
+                    <a href="{{asset('')}}tag/{{$tag->slug}}">{{$tag->name}}</a>
+                @endforeach
+                @endif                                    
+            </div>
             	<div class="clearfix"></div>
             </div> 
 
@@ -174,7 +174,7 @@
             </div>  
             
         </div> <!-- #SIDEBAR -->
-        
+        <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
         
    		<div class="clearfix"></div>
 @endsection  

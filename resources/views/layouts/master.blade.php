@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <!-- STYLES -->
+    
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/game-center-mixed-icons/512/note.png" type="images/x-icon">
     <link rel="stylesheet" type="text/css" href="{{ asset('blog_assets/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('blog_assets/css/slippry.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('blog_assets/css/fonts.css') }}">
@@ -171,9 +173,11 @@
         
         <!-- SEARCH -->
         <div class="tada-search">
-			<form>
+
+			<form action="{{asset('search')}}" method="get">
+                
             	<div class="form-group-search">
-              		<input type="search" class="search-field" placeholder="Search and hit enter...">
+              		<input type="search" class="search-field" name="name" placeholder="Search and hit enter...">
               		<button type="submit" class="search-btn"><i class="icon-search4"></i></button>
             	</div>
           	</form>

@@ -14,6 +14,9 @@
 
 	<!-- CONTENT -->
 	<div class="content col-xs-8">
+        @if(isset($name))
+        <p>Showing result of {{$name}}</p>
+        @endif
     	<!-- ARTICLE  -->  
     	{{-- kiểm tra sự tồn tại của dữ liệu trước khi dùng --}}
 		@if(isset($posts)) 
@@ -23,7 +26,11 @@
 		    	<article>
 		        	<div class="post-image">
 		            	<img src="{{ asset($post->thumbnail) }}" alt="post image 1">
-		                <div class="category"><a href="{{asset('')}}category/{{$post->category_slug}}">IMG</a></div>
+                        @if(isset($post->category))
+    		                <div class="category">
+                                <a href="{{asset('')}}category/{{$post->category_slug}}">{{$post->category->name}}</a>
+                            </div>
+                        @endif
 		            </div>
 		            <div class="post-text">
 		            	<span class="date">{{ $post->created_at }}</span>
@@ -49,6 +56,7 @@
 	    @endif
                
     	<!-- NAVIGATION -->
+        @if(isset($name))
         <div class="navigation">
                     <a href="{{$posts->previousPageUrl()
         }}" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
@@ -56,6 +64,21 @@
         }}" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
                     <div class="clearfix"></div>
         </div>
+        
+        @else
+        
+        <div class="navigation">
+                    <a href="{{$posts->previousPageUrl()
+        }}" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
+                    <a href="{{$posts->nextPageUrl()
+        }}" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
+                    <div class="clearfix"></div>
+        </div>
+        @endif
+        
+        
+
+        
     
     </div>
     
@@ -147,18 +170,11 @@
             	Tags
             </h3>
         	<div class="tags-container">
-                <a href="#">Audio</a>
-                <a href="#">Travel</a>
-                <a href="#">Food</a>
-                <a href="#">Event</a>
-                <a href="#">Wordpress</a>
-                <a href="#">Video</a>
-                <a href="#">Design</a>
-                <a href="#">Sport</a>
-                <a href="#">Blog</a>
-                <a href="#">Post</a> 
-                <a href="#">Img</a>
-                <a href="#">Masonry</a>                                    
+                @if(isset($tags)) 
+                @foreach ($tags as $tag)
+                    <a href="{{asset('')}}tag/{{$tag->slug}}">{{$tag->name}}</a>
+                @endforeach
+                @endif                                    
             </div>
         	<div class="clearfix"></div>
         </div> 

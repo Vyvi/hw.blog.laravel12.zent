@@ -5,6 +5,9 @@
 
 	<!-- CONTENT -->
 	<div class="content col-xs-8">
+        <?php if(isset($name)): ?>
+        <p>Showing result of <?php echo e($name); ?></p>
+        <?php endif; ?>
     	<!-- ARTICLE  -->  
     	
 		<?php if(isset($posts)): ?> 
@@ -14,7 +17,11 @@
 		    	<article>
 		        	<div class="post-image">
 		            	<img src="<?php echo e(asset($post->thumbnail)); ?>" alt="post image 1">
-		                <div class="category"><a href="<?php echo e(asset('')); ?>category/<?php echo e($post->category_slug); ?>">IMG</a></div>
+                        <?php if(isset($post->category)): ?>
+    		                <div class="category">
+                                <a href="<?php echo e(asset('')); ?>category/<?php echo e($post->category_slug); ?>"><?php echo e($post->category->name); ?></a>
+                            </div>
+                        <?php endif; ?>
 		            </div>
 		            <div class="post-text">
 		            	<span class="date"><?php echo e($post->created_at); ?></span>
@@ -41,11 +48,25 @@
 	    <?php endif; ?>
                
     	<!-- NAVIGATION -->
+        <?php if(isset($name)): ?>
         <div class="navigation">
                     <a href="<?php echo e($posts->previousPageUrl()); ?>" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
                     <a href="<?php echo e($posts->nextPageUrl()); ?>" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
                     <div class="clearfix"></div>
         </div>
+        
+        <?php else: ?>
+        
+        <div class="navigation">
+                    <a href="<?php echo e($posts->previousPageUrl()); ?>" class="prev"><i class="icon-arrow-left8"></i> Previous Posts</a>
+                    <a href="<?php echo e($posts->nextPageUrl()); ?>" class="next">Next Posts <i class="icon-arrow-right8"></i></a>
+                    <div class="clearfix"></div>
+        </div>
+        <?php endif; ?>
+        
+        
+
+        
     
     </div>
     
@@ -137,18 +158,11 @@
             	Tags
             </h3>
         	<div class="tags-container">
-                <a href="#">Audio</a>
-                <a href="#">Travel</a>
-                <a href="#">Food</a>
-                <a href="#">Event</a>
-                <a href="#">Wordpress</a>
-                <a href="#">Video</a>
-                <a href="#">Design</a>
-                <a href="#">Sport</a>
-                <a href="#">Blog</a>
-                <a href="#">Post</a> 
-                <a href="#">Img</a>
-                <a href="#">Masonry</a>                                    
+                <?php if(isset($tags)): ?> 
+                <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <a href="<?php echo e(asset('')); ?>tag/<?php echo e($tag->slug); ?>"><?php echo e($tag->name); ?></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>                                    
             </div>
         	<div class="clearfix"></div>
         </div> 
